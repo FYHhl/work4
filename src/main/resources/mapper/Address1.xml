@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace 是用于调用的时候的映射,对应绑定的接口类
+ -->
+<mapper namespace="com.example.mybatisWork.dao.IAddressAdd1">
+    <insert id="add" parameterType="Address" >
+        <!-- 这里的#username 就等于是用 ? 的方式,等方法调用的时候,会传递一个参数,就会自动映射到username的属性上 -->
+        insert into t_address (addr,phone,postcode) values (#{addr},#{phone},#{postcode})
+    </insert>
+    <delete id="deleteByAddress" parameterType="String">
+        delete from t_address where addr=#{addr}
+    </delete>
+    <update id="updateByAddress" parameterType="Address">
+        update t_address set addr=#{addr} where id=#{id};
+    </update>
+    <select id="selectOneById" parameterType="Integer" resultType="Address">
+        select * from t_address where id=#{id};
+    </select>
+</mapper>

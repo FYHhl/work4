@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace 是用于调用的时候的映射
+ -->
+<mapper namespace="Address">
+    <!--
+      id : 表示调用的SQL的名字,相当于方法名
+      parameterType : 表示传入参数的类型,写类全名,但是由于设置的别名,所以可以写User
+      resultType : 结果集类型
+     -->
+    <insert id="add" parameterType="Address" >
+        <!-- 这里的#username 就等于是用 ? 的方式,等方法调用的时候,会传递一个参数,就会自动映射到username的属性上 -->
+        insert into t_address (addr,phone,postcode) values (#{addr},#{phone},#{postcode})
+    </insert>
+    <select id="selectOneById" parameterType="Integer" resultType="Address">
+        select * from t_address where id = #{id}
+    </select>
+    <delete id="deleteOneById" parameterType="Integer" >
+        delete from t_address where id = #{id}
+    </delete>
+    <update id="updateOneById" parameterType="Integer">
+        update t_address set postcode=#{postcode} where id = #{id}
+    </update>
+</mapper>
